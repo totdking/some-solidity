@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Contract Auditor — 6-Month Mastery Roadmap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap');
+
+  :root {
+    --bg: #0a0c0f;
+    --surface: #111318;
+    --surface2: #181c22;
+    --border: #1e2530;
+    --border2: #2a3140;
+    --green: #00e5a0;
+    --green-dim: #00b47e;
+    --green-faint: #00e5a012;
+    --amber: #f5a623;
+    --amber-faint: #f5a62312;
+    --red: #ff4d6a;
+    --red-faint: #ff4d6a10;
+    --blue: #4da6ff;
+    --blue-faint: #4da6ff10;
+    --purple: #9b8aff;
+    --text: #e8edf5;
+    --text2: #8892a4;
+    --text3: #4a5568;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+
+  /* Header */
+  .hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -20%, #00e5a018, transparent);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--green-faint);
+    color: var(--green);
+    border: 1px solid #00e5a030;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 span { color: var(--green); }
+  .hero p {
+    color: var(--text2);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-size: 15px;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 0 0;
+  }
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text2); }
+  .progress-pct { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--green); font-weight: 700; }
+  .progress-bar-bg {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 12px;
+    justify-content: center;
+  }
+  .pstat { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); }
+  .pstat span { color: var(--text2); }
+
+  /* Timeline */
+  .timeline-strip {
+    max-width: 900px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .timeline-month {
+    flex: 1;
+    min-width: 100px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  .timeline-month .month-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .timeline-month .month-steps {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text2);
+  }
+  .timeline-month .month-focus {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 2px;
+  }
+
+  /* Main content */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  .section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Step cards */
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .step-card.completed { border-color: #00e5a030; }
+  .step-card.active { border-color: #4da6ff40; }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .step-header:hover { background: var(--surface2); }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+  .step-card.completed .step-num { background: var(--green-faint); border-color: #00e5a040; color: var(--green); }
+
+  .step-meta { flex: 1; min-width: 0; }
+  .step-title { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .step-subtitle { font-size: 12px; color: var(--text2); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+
+  .step-badges { display: flex; gap: 6px; flex-shrink: 0; align-items: center; }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid;
+    letter-spacing: 0.05em;
+  }
+  .badge-week { background: #4da6ff10; border-color: #4da6ff30; color: var(--blue); }
+  .badge-month { background: #9b8aff10; border-color: #9b8aff30; color: var(--purple); }
+  .badge-done { background: var(--green-faint); border-color: #00e5a040; color: var(--green); }
+
+  .chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--text3);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .step-card.open .chevron { transform: rotate(180deg); }
+
+  /* Step body */
+  .step-body { display: none; padding: 0 1.25rem 1.5rem; }
+  .step-card.open .step-body { display: block; }
+
+  .step-overview {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.25rem;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .step-overview strong { color: var(--text); font-weight: 600; }
+
+  /* Resources */
+  .resources-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .resource-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: var(--text2);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .resource-chip:hover { border-color: var(--blue); color: var(--blue); }
+  .resource-chip .chip-icon { font-size: 10px; color: var(--text3); }
+
+  /* Checklist sections */
+  .checklist-section { margin-bottom: 1.5rem; }
+  .checklist-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .checklist-section-title.understand { color: var(--amber); }
+  .checklist-section-title.cando { color: var(--green); }
+  .checklist-section-title.mastery { color: var(--purple); }
+  .checklist-section-title .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0;
+  }
+  .checklist-section-progress {
+    margin-left: auto;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li:hover { opacity: 0.85; }
+  .checklist li.checked { opacity: 0.5; }
+  .checklist li.checked .item-text { text-decoration: line-through; color: var(--text3); }
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1.5px solid var(--border2);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .understand-list .checkbox { border-color: #f5a62350; }
+  .cando-list .checkbox { border-color: #00e5a030; }
+  .mastery-list .checkbox { border-color: #9b8aff30; }
+
+  .checklist li.checked .checkbox { background: var(--green); border-color: var(--green); }
+  .understand-list li.checked .checkbox { background: var(--amber); border-color: var(--amber); }
+  .mastery-list li.checked .checkbox { background: var(--purple); border-color: var(--purple); }
+
+  .checkmark { display: none; }
+  .checklist li.checked .checkmark { display: block; }
+  .checkmark svg { width: 11px; height: 11px; fill: none; stroke: #0a0c0f; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  .item-text { font-size: 13.5px; color: var(--text); line-height: 1.55; }
+  .item-note { font-size: 12px; color: var(--text3); font-style: italic; margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+
+  /* Step complete button */
+  .step-complete-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .step-progress-mini { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text3); }
+  .step-progress-mini span { color: var(--green); }
+  .mark-done-btn {
+    background: var(--green-faint);
+    border: 1px solid #00e5a030;
+    color: var(--green);
+    border-radius: 6px;
+    padding: 7px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 600;
+  }
+  .mark-done-btn:hover { background: #00e5a025; border-color: var(--green); }
+  .step-card.completed .mark-done-btn { background: var(--green); color: #0a0c0f; }
+
+  /* Month dividers */
+  .month-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 2rem 0 1rem;
+  }
+  .month-divider-label {
+    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+  }
+  .month-divider-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* Reset */
+  .reset-btn {
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--text3);
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 2rem;
+  }
+  .reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 2rem 1.25rem 1.5rem; }
+    .container { padding: 1.5rem 1.25rem 3rem; }
+    .step-badges .badge-month { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">// 6-Month Mastery Program</div>
+  <h1>Ethereum Smart Contract<br><span>Auditor Roadmap</span></h1>
+  <p>18 steps from zero to audit-ready. Complete every checklist item to prove you own the knowledge — not just read it.</p>
+  <div class="progress-wrap">
+    <div class="progress-header">
+      <span class="progress-label">// overall mastery</span>
+      <span class="progress-pct" id="global-pct">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="global-bar"></div>
+    </div>
+    <div class="progress-stats">
+      <span class="pstat">Steps completed: <span id="steps-done">0</span>/18</span>
+      <span class="pstat">Tasks checked: <span id="tasks-done">0</span>/<span id="tasks-total">0</span></span>
+    </div>
+  </div>
+</div>
+
+<div class="timeline-strip">
+  <div class="timeline-month"><div class="month-label">MONTH 1</div><div class="month-steps">Steps 1–4</div><div class="month-focus">Foundations</div></div>
+  <div class="timeline-month"><div class="month-label">MONTH 2</div><div class="month-steps">Steps 5–8</div><div class="month-focus">Standards & Security</div></div>
+  <div class="timeline-month"><div class="month-label">MONTH 3</div><div class="month-steps">Steps 9–11</div><div class="month-focus">Low-Level & DeFi</div></div>
+  <div class="timeline-month"><div class="month-label">MONTH 4</div><div class="month-steps">Steps 12–14</div><div class="month-focus">Attack Vectors</div></div>
+  <div class="timeline-month"><div class="month-label">MONTH 5</div><div class="month-steps">Steps 15–17</div><div class="month-focus">Standards & Tools</div></div>
+  <div class="timeline-month"><div class="month-label">MONTH 6</div><div class="month-steps">Step 18 +</div><div class="month-focus">Real Audits</div></div>
+</div>
+
+<div class="container">
+
+<div class="month-divider"><div class="month-divider-label">Month 1 — Foundations</div><div class="month-divider-line"></div></div>
+
+<!-- STEP 1 -->
+<div class="step-card" id="step-1" data-step="1">
+  <div class="step-header" onclick="toggleStep(1)">
+    <div class="step-num">01</div>
+    <div class="step-meta">
+      <div class="step-title">Blockchain Fundamentals</div>
+      <div class="step-subtitle">proof of work · proof of stake · consensus · cryptography</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 1–2</span>
+      <span class="badge badge-month">Month 1</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Before touching a single line of code, you must understand what you are securing. Blockchains are adversarial environments where every transaction is public, irreversible, and executed by an untrusted virtual machine. <strong>Without understanding the underlying consensus and economic model, you cannot reason about attack surfaces.</strong> This step is your mental foundation — everything else builds on it.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📖</span>Mastering Ethereum (Book)</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Proof of Work vs Proof of Stake (Video)</span>
+      <span class="resource-chip"><span class="chip-icon">📖</span>The Eth2 Book</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Ethereum Yellow Paper</span>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u1-prog">0/10</div></div>
+      <ul class="checklist understand-list" id="u1">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How Proof of Work achieves consensus and why it is energy-intensive</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How Proof of Stake replaces computational work with economic stake and why it changes the attack model</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What a 51% attack is and why it is economically costly in both PoW and PoS</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The structure of an Ethereum block: header, transactions, receipts, state root</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What the EVM is and how it differs from a normal computer (deterministic, gas-metered)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What Merkle trees and Merkle Patricia Tries are and how they enable trustless state verification</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How public/private key cryptography works and how Ethereum addresses are derived from keys</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The difference between EOAs (Externally Owned Accounts) and Contract Accounts</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What finality means in blockchain and why transactions can be reverted before finality</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why blockchain immutability is a double-edged sword for smart contract security</div></div></li>
+      </ul>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c1-prog">0/6</div></div>
+      <ul class="checklist cando-list" id="c1">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain to a non-technical person how Ethereum reaches agreement on the correct state without a central server</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read a raw transaction on Etherscan and identify the sender, receiver, value, gas price, and input data</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Describe the flow of a transaction from broadcast to finality, step by step</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain why a smart contract bug is catastrophic (no hotfix, no rollback, funds lost forever)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Sign a message with MetaMask and verify it, demonstrating you understand key-based identity</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Calculate a Merkle root by hand for a small set of transactions and verify a Merkle proof</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog1">0</span>/16 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(1)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step-card" id="step-2" data-step="2">
+  <div class="step-header" onclick="toggleStep(2)">
+    <div class="step-num">02</div>
+    <div class="step-meta">
+      <div class="step-title">Solidity Fundamentals</div>
+      <div class="step-subtitle">syntax · types · storage · events · ABI · functions · modifiers</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 3–4</span>
+      <span class="badge badge-month">Month 1</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Solidity is the language you will audit. You don't need to be a developer — you need to be a <strong>reader and a skeptic</strong>. Every line of code you audit is a potential attack surface. Your job is to read contracts with the same precision a lawyer reads a legal document: every word matters, every omission matters, every assumption matters.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>Solidity Official Docs</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Smart Contract Programmer — Solidity 0.8</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Secureum Solidity 101</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Secureum Solidity 201</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u2-prog">0/12</div></div>
+      <ul class="checklist understand-list" id="u2">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">All Solidity data types: uint, int, address, bool, bytes, string, arrays, mappings, structs, enums</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The three storage locations: storage (persistent, expensive), memory (temporary, cheaper), calldata (read-only, cheapest)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Function visibility: public, private, internal, external — and the security implications of each</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">State mutability: pure, view, payable — and what each guarantees (or fails to guarantee)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How modifiers work and how they can create subtle bugs if chained or misused</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What events and logs are, how they are stored, and why they are not a security mechanism</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The ABI (Application Binary Interface): how Solidity functions are encoded for EVM calls</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How inheritance, interfaces, and abstract contracts work and where they introduce hidden behavior</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Constructor behavior and the difference between Solidity 0.7 and 0.8 (overflow protection, custom errors)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">msg.sender, msg.value, block.timestamp, block.number — and why each is dangerous to rely on</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The three ways to send ETH: transfer, send, call — and why only call is currently recommended</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How try/catch works in Solidity and when it can fail silently</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c2-prog">0/7</div></div>
+      <ul class="checklist cando-list" id="c2">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a basic ERC-20-like token contract from scratch (without libraries) and deploy it on a testnet</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read a 200-line Solidity contract you've never seen before and summarize what it does, who the roles are, and what the key state variables are</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Identify which storage slots each state variable occupies (including packing rules)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Decode ABI-encoded calldata for a known function signature by hand</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Spot at least 3 bugs intentionally placed in a buggy sample contract (reentrancy, access control, integer issue)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use Remix IDE to compile, deploy, and interact with a contract, reading all state changes</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain to someone else why using block.timestamp for randomness is exploitable by validators</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog2">0</span>/19 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(2)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step-card" id="step-3" data-step="3">
+  <div class="step-header" onclick="toggleStep(3)">
+    <div class="step-num">03</div>
+    <div class="step-meta">
+      <div class="step-title">Gas Optimizations</div>
+      <div class="step-subtitle">gas costs · storage layout · opcodes · EVM execution model</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 5</span>
+      <span class="badge badge-month">Month 1</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Understanding gas is not just about efficiency — it is about <strong>security</strong>. Gas limits can be weaponized (DoS via gas exhaustion), storage patterns affect reentrancy safety, and gas cost changes from EIPs can break assumptions contracts were built on. Every auditor must understand the economic layer of the EVM.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>Juan: Advanced Gas Optimizations</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Kaden: Gas Optimization Tips</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Aggregated Tricks (pcaversaccio)</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u3-prog">0/9</div></div>
+      <ul class="checklist understand-list" id="u3">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why storage operations (SSTORE/SLOAD) are the most expensive EVM operations and their exact gas costs (cold vs warm access)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How storage slot packing works and when it saves gas (multiple variables packed into one 32-byte slot)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The gas cost difference between memory expansion and calldata, and why calldata is preferred for function arguments</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How a DoS-by-gas-limit attack works: loops over unbounded arrays that exceed the block gas limit</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What EIP-2929 (access lists / cold vs warm storage) changed about gas costs and how it affects older contracts</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why short-circuiting in conditionals matters for gas (and how attackers can exploit predictable execution paths)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The gas refund mechanism (SSTORE to zero) and how it has changed over time (EIP-3529)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why custom errors are cheaper than revert strings (gas implications for users)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Memory expansion costs: why large in-memory data structures can unexpectedly consume enormous amounts of gas</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c3-prog">0/5</div></div>
+      <ul class="checklist cando-list" id="c3">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Look at a function and estimate which operations will be the most gas-expensive before running it</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Identify a loop-based DoS vulnerability in a contract and explain exactly how an attacker would trigger it</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Reorganize a struct's fields to minimize storage slots used (apply variable packing correctly)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain why a push-based payment model (send ETH to array of recipients) is dangerous vs a pull-based model</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use Remix or Foundry to measure exact gas costs of two versions of the same function</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog3">0</span>/14 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(3)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step-card" id="step-4" data-step="4">
+  <div class="step-header" onclick="toggleStep(4)">
+    <div class="step-num">04</div>
+    <div class="step-meta">
+      <div class="step-title">Smart Contract Testing & Debugging</div>
+      <div class="step-subtitle">hardhat · foundry · unit tests · fuzzing · fork testing</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 6–7</span>
+      <span class="badge badge-month">Month 1</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      An auditor who cannot write tests cannot prove a vulnerability. When you find a bug, <strong>you must write a Proof of Concept (PoC)</strong> — a test that demonstrates the exploit. If you can't write a PoC, the finding is just a theory. Foundry is the industry standard for auditing PoCs. Master it now.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>Hardhat Docs</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Foundry Book</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Better Programming Hub</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Code Eater (Hindi)</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Tenderly</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u4-prog">0/8</div></div>
+      <ul class="checklist understand-list" id="u4">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The difference between unit tests, integration tests, and fork tests — and when to use each in auditing</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What fuzzing is: automatically generating inputs to find edge cases, and why it finds bugs humans miss</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What a fork test is: running tests against a mainnet fork with real state (Uniswap balances, real prices)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Foundry's cheat codes: vm.prank, vm.deal, vm.warp, vm.roll, vm.expectRevert, vm.expectEmit</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to use vm.store to directly write to a contract's storage slot (bypassing access controls in tests)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What a test invariant is and why invariant-based fuzzing is the most powerful automated testing technique</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to use Tenderly to simulate a transaction and trace the exact EVM execution step-by-step</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What a Proof of Concept exploit test looks like and what sections it must contain (setup, attack, assertion)</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c4-prog">0/7</div></div>
+      <ul class="checklist cando-list" id="c4">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Set up a Foundry project from scratch, write a test file, and run it with forge test</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a Foundry PoC that exploits a reentrancy vulnerability in a sample contract — the test should drain the contract's funds</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Run a fork test against Ethereum mainnet using a real protocol (e.g., call Uniswap to get a real price)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a fuzz test in Foundry (function starting with testFuzz_) that tests a mathematical invariant</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use vm.prank to impersonate the contract owner and call a privileged function in a test</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Trace a failing transaction on Tenderly and identify the exact line of code that reverted</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Calculate test coverage with forge coverage and identify which branches are untested</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog4">0</span>/15 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(4)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<div class="month-divider"><div class="month-divider-label">Month 2 — Standards & Security</div><div class="month-divider-line"></div></div>
+
+<!-- STEP 5 -->
+<div class="step-card" id="step-5" data-step="5">
+  <div class="step-header" onclick="toggleStep(5)">
+    <div class="step-num">05</div>
+    <div class="step-meta">
+      <div class="step-title">ERC Token Standards</div>
+      <div class="step-subtitle">ERC-20 · ERC-721 · ERC-777 · ERC-1155 · ERC-4626 · ERC-2981</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 8</span>
+      <span class="badge badge-month">Month 2</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Most DeFi contracts interact with tokens. An auditor who doesn't know every token standard deeply will miss an entire class of vulnerabilities. <strong>ERC-777 hooks created the bZx exploit. ERC-4626 vault share inflation attacks are still being found.</strong> Know these standards better than the developers who implement them.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-20 (ERC-20)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-721 (ERC-721)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-777</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-1155</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-4626 (Tokenized Vaults)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-2981 (Royalties)</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u5-prog">0/10</div></div>
+      <ul class="checklist understand-list" id="u5">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The complete ERC-20 interface: every function, every event, and what edge cases the spec allows (e.g., approve race condition)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Fee-on-transfer tokens: why they break accounting in contracts that assume transfer(X) means exactly X arrives</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Rebasing tokens: why tokens with changing balances break DeFi protocols that cache balances</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">ERC-721: safeTransfer hooks, why onERC721Received can re-enter, why ownerOf(tokenId) can revert</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">ERC-777: send hooks (tokensToSend, tokensReceived) and how they enabled reentrancy attacks on Uniswap v1</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">ERC-1155: batch transfers, the ID collision risk, how safeBatchTransferFrom hooks enable reentrancy</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">ERC-4626: how share/asset conversion works, the share inflation attack on empty vaults, how to mitigate it</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Tokens that return false instead of reverting: why checking return values of transfer() is critical</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Tokens with blacklists (USDC, USDT): how token blacklisting can DoS a protocol's core functions</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What SafeERC20 from OpenZeppelin does and which token-related bugs it prevents</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c5-prog">0/5</div></div>
+      <ul class="checklist cando-list" id="c5">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a Foundry test that demonstrates the ERC-4626 share inflation attack from scratch</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Look at a contract that uses token.transfer() without SafeERC20 and explain exactly what tokens will break it</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Given a DeFi protocol's token integration code, identify whether it handles fee-on-transfer tokens correctly</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Demonstrate the ERC-777 reentrancy attack vector in a Foundry test</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read the full ERC-20 spec and list every place a compliant token is allowed to behave "weirdly"</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog5">0</span>/15 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(5)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="step-card" id="step-6" data-step="6">
+  <div class="step-header" onclick="toggleStep(6)">
+    <div class="step-num">06</div>
+    <div class="step-meta">
+      <div class="step-title">OpenZeppelin Libraries & Contracts</div>
+      <div class="step-subtitle">AccessControl · Ownable · Pausable · ReentrancyGuard · SafeERC20</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 9</span>
+      <span class="badge badge-month">Month 2</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      90% of production contracts inherit from OpenZeppelin. <strong>You must understand every line of these contracts</strong>, not just how to use them. Knowing what OZ protects against — and what it does NOT protect against — is essential. Most auditors know the happy path; you need to know where the library assumes things that developers forget.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>OpenZeppelin Contracts GitHub</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>OpenZeppelin Docs</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u6-prog">0/9</div></div>
+      <ul class="checklist understand-list" id="u6">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How Ownable works, how transferOwnership() can be used for a rug pull, and why two-step ownership transfer (Ownable2Step) is safer</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How AccessControl implements role-based permissions and what happens if DEFAULT_ADMIN_ROLE is misconfigured</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How ReentrancyGuard's nonReentrant modifier works at the EVM level (storage flag) and what cross-function reentrancy it does NOT protect against</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How Pausable works and the danger of a centralized pause mechanism (who controls the key?)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How SafeERC20's safeTransfer works (wraps call, checks return, reverts if fails) and which token edge cases it handles</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How OZ's ERC-20 differs from a raw implementation (extra checks, no fee-on-transfer support built in)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Merkle-proof-based allowlists (MerkleProof.sol): how they work and what makes a proof invalid</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The TimelockController pattern: why time-delays on admin functions are a security feature and what they don't protect against</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Governor contracts (OZ Governor): on-chain governance attack vectors (flash loan governance, low quorum exploits)</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c6-prog">0/5</div></div>
+      <ul class="checklist cando-list" id="c6">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read any OZ contract's source code on GitHub and trace every function call through the inheritance chain</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a test demonstrating cross-function reentrancy that bypasses nonReentrant (function A is guarded, function B is not, they share state)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain to an auditing team 3 access control bugs commonly found in contracts that use OZ AccessControl incorrectly</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Identify an incorrect version of OZ being used in a contract (e.g., v4 vs v5 breaking changes)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Given a multisig + timelock setup, map out every path an attacker could take if they compromised one signer</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog6">0</span>/14 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(6)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 7 -->
+<div class="step-card" id="step-7" data-step="7">
+  <div class="step-header" onclick="toggleStep(7)">
+    <div class="step-num">07</div>
+    <div class="step-meta">
+      <div class="step-title">Upgradeable Contracts</div>
+      <div class="step-subtitle">proxy patterns · EIP-897 · EIP-1822 · EIP-1967 · storage collisions · initializers</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 10–11</span>
+      <span class="badge badge-month">Month 2</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Upgradeable contracts are among the most complex and bug-prone patterns in all of smart contract development. <strong>Storage slot collisions, uninitialized proxies, and function selector clashes</strong> have caused real million-dollar exploits. If a project uses proxies, budget 30-40% more time for that audit.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📹</span>Smart Contract Programmer — Upgradeable Contracts</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Smart Contract Programmer — Risks of Upgradeable Contracts</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-897 (Proxy Standard)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-1822 (UUPS)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-1967 (Proxy Storage Slots)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-2535 (Diamond)</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u7-prog">0/10</div></div>
+      <ul class="checklist understand-list" id="u7">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How delegatecall works at the EVM level: execution context is caller, but storage is callee's slots</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Transparent Proxy (EIP-897): how admin/user function clash is prevented and the extra gas cost of admin checks</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">UUPS Proxy (EIP-1822): why upgrade logic lives in the implementation and the danger of accidentally bricking it</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Storage layout collisions: why adding variables in the wrong position in an upgrade corrupts all existing storage</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The uninitialized proxy attack: why initialize() must be called atomically on deployment</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Function selector clashes between proxy admin functions and implementation functions</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The Diamond pattern (EIP-2535): facets, the diamond cut, and why it was invented (bypassing contract size limits)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why constructor logic cannot be used in upgradeable contracts (it only runs for the implementation, not the proxy)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Beacon proxies: how they allow updating many proxies in one transaction by changing the beacon's implementation pointer</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Immutable variables and upgradeable contracts: why immutables in implementation contracts produce undefined behavior</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c7-prog">0/6</div></div>
+      <ul class="checklist cando-list" id="c7">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Given two versions of an implementation contract (V1 and V2), identify all storage layout incompatibilities</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a Foundry test that demonstrates the uninitialized proxy attack (attacker calls initialize before the team does)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use Slither's slither-check-upgradeability to detect upgrade safety issues in a proxy contract</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read a deployed proxy on Etherscan: find the implementation address from EIP-1967 storage slot 0x360894...</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain the centralization risks of an upgradeable contract to a non-technical investor (the team can change anything)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Identify a function selector clash between a Transparent Proxy's admin functions and the implementation</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog7">0</span>/16 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(7)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 8 -->
+<div class="step-card" id="step-8" data-step="8">
+  <div class="step-header" onclick="toggleStep(8)">
+    <div class="step-num">08</div>
+    <div class="step-meta">
+      <div class="step-title">Smart Contract Attack Vectors</div>
+      <div class="step-subtitle">reentrancy · integer overflow · access control · oracle manipulation · logic bugs</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 12–13</span>
+      <span class="badge badge-month">Month 2</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      This is the core of smart contract security. <strong>Every finding you make in your career will map back to one or more of these attack categories.</strong> You must not just know these categories exist — you must be able to recognize their signatures in unfamiliar code instantly, like a doctor recognizing a disease by its symptoms.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>Secureum Security Pitfalls 101</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Secureum Security Pitfalls 201</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>SWC Registry</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Smart Contract Programmer — Hack Solidity</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Kaden: Smart Contract Attack Vectors</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u8-prog">0/14</div></div>
+      <ul class="checklist understand-list" id="u8">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Reentrancy: single-function, cross-function, cross-contract, and read-only reentrancy — with a concrete example of each</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Integer overflow/underflow: why Solidity 0.8 made this rare but not impossible (unchecked blocks, casting)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Access control failures: missing onlyOwner, tx.origin vs msg.sender confusion, misconfigured roles</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Oracle manipulation: spot price oracles vs TWAP oracles and why spot prices can be manipulated in a single transaction</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Denial of Service: block gas limit, unexpected revert, selective revert in a multi-call</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Signature replay attacks: why signatures must include chainId, nonce, and contract address</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Front-running: how miners/validators can reorder transactions to profit and how slippage protection mitigates it</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Precision loss: fixed-point arithmetic bugs, division before multiplication, rounding direction exploits</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Griefing attacks: how an attacker can permanently damage a protocol without profiting themselves</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Timestamp manipulation: what validators can manipulate and what the safe window is</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Unchecked return values: failed external calls that are silently ignored</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Initialization attacks: contracts deployed without being initialized that can be taken over</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Delegate call to untrusted contracts: why delegatecall to user-supplied addresses is nearly always exploitable</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Short address / off-by-one errors and type confusion between uint sizes when casting</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c8-prog">0/7</div></div>
+      <ul class="checklist cando-list" id="c8">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write Foundry PoC exploits for: reentrancy, signature replay, and access control bypass — from scratch</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Scan a contract for the classic Checks-Effects-Interactions pattern violation and explain why it enables reentrancy</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Classify a finding using OWASP SWC Registry ID and assign it a severity level (Critical/High/Medium/Low) with justification</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read 5 different Secureum quiz questions, answer them correctly, and explain the reasoning</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain to a developer why tx.origin should never be used for authentication</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Given an integer math function, determine whether it can overflow/underflow under any realistic input</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Identify read-only reentrancy in a protocol that uses balanceOf() from another contract as a price source</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog8">0</span>/21 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(8)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<div class="month-divider"><div class="month-divider-label">Month 3 — Low-Level & DeFi</div><div class="month-divider-line"></div></div>
+
+<!-- STEP 9 -->
+<div class="step-card" id="step-9" data-step="9">
+  <div class="step-header" onclick="toggleStep(9)">
+    <div class="step-num">09</div>
+    <div class="step-meta">
+      <div class="step-title">Yul, Inline Assembly & Opcodes</div>
+      <div class="step-subtitle">EVM opcodes · Yul syntax · inline assembly · memory layout · precompiles</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 14</span>
+      <span class="badge badge-month">Month 3</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      High-value protocols use assembly for gas optimization or to do things Solidity cannot express. <strong>If you cannot read assembly, you cannot audit the most sophisticated protocols.</strong> This is the layer where the most subtle and devastating bugs live — things the Solidity compiler cannot catch.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>EVM Opcodes Reference</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Solidity Inline Assembly Docs</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EVM Deep Dives (noxx)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Ethereum Yellow Paper — Appendix H</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u9-prog">0/10</div></div>
+      <ul class="checklist understand-list" id="u9">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The EVM stack: 1024-item limit, 32-byte words, and how every opcode consumes and produces stack items</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Memory layout in the EVM: the free memory pointer (0x40), scratch space (0x00–0x3f), and how Solidity uses memory</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Key opcodes you will see in audited code: CALL, STATICCALL, DELEGATECALL, SLOAD, SSTORE, MLOAD, MSTORE, CALLDATALOAD, RETURNDATASIZE</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How dynamic gas costs work: why SLOAD costs differ for first access vs subsequent access in the same transaction</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Yul syntax: how to read let, if, for, switch, function definitions, and how they map to opcodes</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What the precompiles are (1–9) and what each does: ecrecover, sha256, identity, modexp, BN128 operations</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How ecrecover works, what it returns on failure (address(0)), and how signature malleability attacks work</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How assembly blocks in Solidity can bypass Solidity's type system and safety checks</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Memory expansion cost formula: why accessing memory at very high offsets is exponentially expensive</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">CREATE vs CREATE2: how CREATE2 allows predetermining contract addresses and what salt-based exploits look like</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c9-prog">0/5</div></div>
+      <ul class="checklist cando-list" id="c9">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read a 20-line Yul/assembly block in a real protocol (e.g., Uniswap v3 or Seaport) and explain what it does</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use evm.codes to trace through a sequence of opcodes and predict the stack state at each step</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a simple Yul contract (e.g., a minimal proxy clone) and deploy it</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Identify a signature malleability bug in a contract that uses ecrecover without checking s range</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Decompile a contract bytecode using a tool (e.g., dedaub or panoramix) and identify its main functions</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog9">0</span>/15 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(9)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 10 -->
+<div class="step-card" id="step-10" data-step="10">
+  <div class="step-header" onclick="toggleStep(10)">
+    <div class="step-num">10</div>
+    <div class="step-meta">
+      <div class="step-title">CTFs — Capture The Flag</div>
+      <div class="step-subtitle">Ethernaut · Capture The Ether · CipherShastra · Damn Vulnerable DeFi</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 15–16</span>
+      <span class="badge badge-month">Month 3</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      CTFs are where theoretical knowledge becomes real skill. <strong>You will fail. That is the point.</strong> Every puzzle you cannot solve immediately reveals a gap. Do NOT look at solutions before spending at least 2 hours thinking independently. When you do read solutions, don't just understand them — replicate them in Foundry from memory.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">🎯</span>Ethernaut (OpenZeppelin)</span>
+      <span class="resource-chip"><span class="chip-icon">🎯</span>Capture The Ether</span>
+      <span class="resource-chip"><span class="chip-icon">🎯</span>CipherShastra</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>CTF WriteUps Curated List</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u10-prog">0/6</div></div>
+      <ul class="checklist understand-list" id="u10">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why CTFs are the single best way to internalize attack patterns — reading is passive, exploiting is active learning</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The CTF methodology: read the contract, identify the win condition, trace backwards to find the attack path</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How Ethernaut challenges map to real vulnerabilities found in production audits</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to write an attacker contract that interacts with a victim in the same Foundry test</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The difference between a level where you exploit existing code vs a level where you deploy a malicious contract</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to write a professional-quality writeup for a CTF challenge (vulnerability, root cause, PoC, fix)</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Milestone Challenges You Must Complete<div class="checklist-section-progress" id="c10-prog">0/10</div></div>
+      <ul class="checklist cando-list" id="c10">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Complete all 30 Ethernaut levels (0–29) and write a one-sentence explanation of the bug for each</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Complete Capture The Ether: all Lotteries, Math, Accounts, Miscellaneous sections</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Solve at least 3 CipherShastra challenges and write up your approach</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Reproduce any 5 Ethernaut solutions entirely in Foundry (not the web UI) as proper test files</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Solve a challenge you initially gave up on — come back with a new perspective and succeed</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a full professional writeup for one CTF challenge and publish it (GitHub, mirror.xyz, or Twitter thread)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Solve Ethernaut: King, Reentrancy, Elevator, Privacy, Gatekeeper One, and Gatekeeper Two</div><div class="item-note">// these are the hardest — budget a full day each</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Solve Ethernaut: MagicNumber — write valid EVM bytecode by hand without Solidity</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">For each CTF you complete, match the bug to a category from Step 8 and the SWC Registry</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Solve at least one CTF challenge from a recent competitive audit competition (Sherlock, Code4rena)</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog10">0</span>/16 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(10)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 11 -->
+<div class="step-card" id="step-11" data-step="11">
+  <div class="step-header" onclick="toggleStep(11)">
+    <div class="step-num">11</div>
+    <div class="step-meta">
+      <div class="step-title">DeFi Deep Dive</div>
+      <div class="step-subtitle">AMMs · lending · stablecoins · vaults · Uniswap · Compound · Aave · Curve</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 17–19</span>
+      <span class="badge badge-month">Month 3</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Most high-value smart contract audits are DeFi protocols. <strong>You cannot find a bug in a system you don't understand.</strong> Read the whitepapers, read the code, run the math yourself. Know Uniswap v2's x*y=k formula from memory. Know Aave's health factor calculation. If you know these protocols better than the devs, you will find the bugs they missed.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📹</span>Smart Contract Programmer — DeFi</span>
+      <span class="resource-chip"><span class="chip-icon">📹</span>Finematics — DeFi Explained</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>DeFi MOOC (Berkeley)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Uniswap v2/v3/v4 Docs + Code</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Compound v2 Whitepaper</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Aave v2/v3 Docs</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Curve Whitepaper</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u11-prog">0/12</div></div>
+      <ul class="checklist understand-list" id="u11">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The AMM constant product formula (x*y=k) and how Uniswap v2 computes price and handles swaps</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Concentrated liquidity (Uniswap v3): tick math, price ranges, and why liquidity is not uniform</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How overcollateralized lending works: collateral factor, borrow limit, liquidation threshold, health factor</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What flash loans are, how they work mechanically, and why they are neutral tools (not inherently malicious)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How Aave's interest rate model works: utilization rate, stable vs variable rates, the kink point</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Curve's stableswap invariant: why it provides lower slippage for like-kind assets than a standard AMM</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Algorithmic stablecoins: how they maintain their peg (or fail to), using Terra/LUNA as the canonical failure case</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Staking reward accounting: how reward-per-share math works and where it breaks under edge conditions</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">ERC-4626 vault share accounting: how deposit/withdraw/mint/redeem are supposed to be symmetric</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Balancer's weighted pools: how the invariant differs from Uniswap and what new attack surfaces it introduces</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">MEV (Maximal Extractable Value): sandwich attacks, arbitrage, liquidations, and why they affect protocol design</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Liquidity mining and yield farming: how protocol-owned liquidity programs create incentive misalignments</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c11-prog">0/7</div></div>
+      <ul class="checklist cando-list" id="c11">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Implement Uniswap v2's swap function from scratch (using the x*y=k formula) and verify it against the original</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a Foundry fork test that takes a flash loan from Aave on mainnet</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Calculate Aave's health factor for a given position and determine the minimum collateral price for liquidation</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain how the staking reward accounting breaks if a user deposits during a reward period that started before their deposit</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read Compound v2's CToken.sol source and explain the exchange rate calculation between cTokens and underlying assets</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Draw a complete diagram of a flash loan attack: entry, exploit, repayment, and profit extraction</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Complete all levels of Damn Vulnerable DeFi (after Step 11 content is absorbed)</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog11">0</span>/19 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(11)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<div class="month-divider"><div class="month-divider-label">Month 4 — Attack Vectors & Audit Practice</div><div class="month-divider-line"></div></div>
+
+<!-- STEP 12 -->
+<div class="step-card" id="step-12" data-step="12">
+  <div class="step-header" onclick="toggleStep(12)">
+    <div class="step-num">12</div>
+    <div class="step-meta">
+      <div class="step-title">DeFi Attack Vectors</div>
+      <div class="step-subtitle">flash loans · oracle manipulation · sandwich · front-running · rug pulls</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Weeks 20–21</span>
+      <span class="badge badge-month">Month 4</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      DeFi-specific attack vectors require understanding both the vulnerability class AND the economic context. <strong>A flash loan by itself is not an exploit — it's a tool. The exploit is what the attacker does with uncollateralized liquidity in a single transaction.</strong> Learn to think like an attacker who has infinite capital for exactly one block.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">🎯</span>Damn Vulnerable DeFi</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Flash Loan Attack Papers</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Rekt News Archive</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u12-prog">0/9</div></div>
+      <ul class="checklist understand-list" id="u12">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Flash loan + price oracle manipulation: borrow huge amount → move spot price → exploit protocol relying on that price → repay</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why TWAP oracles (time-weighted average price) resist single-transaction manipulation (but not multi-block)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Sandwich attacks: attacker front-runs a victim's swap with a buy, victim's swap moves price, attacker back-runs with a sell</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Rug pull mechanics: unlimited token allowance exploits, admin mint functions, migrator backdoors</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Liquidation cascade attacks: how an attacker can force mass liquidations to profit from the liquidation bonus</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Governance attacks: flash loan voting, low-quorum governance, malicious proposal encoding</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Donation/inflation attacks: directly transferring tokens to a pool to manipulate share pricing</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Callback-based reentrancy in DeFi: how flash loan callbacks, ERC-777 hooks, and NFT safeTransfer hooks enable attacks</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Cross-chain bridge attacks: how oracle mismatches and replay vulnerabilities have drained billions</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c12-prog">0/6</div></div>
+      <ul class="checklist cando-list" id="c12">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a Foundry PoC that executes a flash loan price oracle attack on a mock lending protocol</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Look at any DeFi contract's oracle implementation and determine if it is vulnerable to single-block manipulation</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Review a token contract and identify every mechanism by which the deployer could steal funds (rug surfaces)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Reconstruct the attack path of any historical DeFi exploit from Rekt News in a Foundry fork test</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain to a protocol team exactly what slippage parameter they need to protect against sandwich attacks</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Complete all Damn Vulnerable DeFi challenges (if not already done after Step 11)</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog12">0</span>/15 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(12)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 13 -->
+<div class="step-card" id="step-13" data-step="13">
+  <div class="step-header" onclick="toggleStep(13)">
+    <div class="step-num">13</div>
+    <div class="step-meta">
+      <div class="step-title">Postmortems & Bug Fixes</div>
+      <div class="step-subtitle">Rekt News · Immunefi · BlockSec · SlowMist · PeckShield</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 22</span>
+      <span class="badge badge-month">Month 4</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Reading postmortems is the closest you can get to auditing real exploited code without doing actual audits. <strong>Every hack that happened is a case study of what a real auditor missed.</strong> Read the hack, find the vulnerable contract, understand the bug, then ask yourself: "What would I have looked for? Would I have found it?" Be brutally honest.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>Rekt News</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Immunefi Blog</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>BlockSec Analysis</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>SlowMist Hacked DB</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>PeckShield Alerts</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u13-prog">0/6</div></div>
+      <ul class="checklist understand-list" id="u13">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to read a BlockSec transaction analysis: follow the money through multiple contracts using a call trace</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to find the vulnerable contract version on GitHub (commit before the patch) and compare it to the fixed version</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The pattern of how most audited protocols still got hacked: audit scope exclusions, post-audit changes, new integrations</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to calculate the economic impact of a hack (total value drained vs attacker profit after repaying flash loans)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The common pattern: bug was introduced during an upgrade, OR new protocol integration introduced the vulnerability</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How emergency response works: pausing contracts, negotiating with hackers, white-hat rescues</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c13-prog">0/6</div></div>
+      <ul class="checklist cando-list" id="c13">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read and fully understand 20 hack postmortems from Rekt News (minimum) — for each, write a one-paragraph root cause analysis</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Reproduce the Euler Finance hack, Nomad Bridge hack, or Ronin Network hack in a Foundry fork test</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Given the pre-hack and post-hack code diff, identify exactly which changed line introduced the vulnerability</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use Phalcon or Tenderly to follow a hack transaction through every call frame and token transfer</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">For any protocol you audit in your career, use the Rekt leaderboard to check if similar protocols were hacked first</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Create a personal database of hack categories and map each hack you study to a bug class from Step 8</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog13">0</span>/12 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(13)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 14 -->
+<div class="step-card" id="step-14" data-step="14">
+  <div class="step-header" onclick="toggleStep(14)">
+    <div class="step-num">14</div>
+    <div class="step-meta">
+      <div class="step-title">Audit Report Reading</div>
+      <div class="step-subtitle">Consensys · Trail of Bits · OpenZeppelin · Code4rena · Sherlock · Solodit</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 23</span>
+      <span class="badge badge-month">Month 4</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Before you write reports, you must read hundreds of them. <strong>Audit reports are the professional vocabulary of this industry.</strong> You learn what findings look like at every severity, how to structure a PoC, how to recommend fixes, and how top firms communicate risk to non-technical teams. Every report is also a catalogue of bugs you can look for in future audits.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>Secureum Audit Findings 101</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Secureum Audit Findings 201</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Consensys Diligence Reports</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Trail of Bits Reports</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>OpenZeppelin Audit Reports</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Code4rena Reports</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Solodit (Database)</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u14-prog">0/7</div></div>
+      <ul class="checklist understand-list" id="u14">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The anatomy of a professional audit finding: Title → Severity → Description → Impact → Proof of Concept → Recommendation</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Severity classification systems: Critical/High/Medium/Low/Informational and what criteria determine each</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The difference between a finding and a recommendation: findings are vulnerabilities, recommendations are best practices</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How Trail of Bits structures their reports vs how Code4rena wardens structure theirs — and why they differ</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What "likelihood × impact = severity" means and when to override the formula (e.g., griefing attacks with low profit but high impact)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What a "wontfix" or "acknowledged" response from a team means and how to handle it in your report</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How competitive audit platforms (Code4rena, Sherlock) judge findings: deduplication, severity disputes, partial credit</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c14-prog">0/7</div></div>
+      <ul class="checklist cando-list" id="c14">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read 10 full audit reports from top firms (Trail of Bits, OpenZeppelin, Consensys) and catalogue every High/Critical finding</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write your first mock audit finding from scratch: pick a real bug from Solodit and write it up as if you found it yourself</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read a Code4rena report and for each finding, agree or disagree with the severity rating — justify your assessment</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use Solodit to search for all findings related to "reentrancy" in ERC-4626 vaults and identify the patterns</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Complete the Secureum Audit Findings 101 and 201 quizzes with a score above 80%</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a full mini audit report (introduction, scope, findings, severity summary) for any open-source DeFi contract</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Find a real competitive audit on Code4rena, read all submissions, and judge which findings you agree with — document your reasoning</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog14">0</span>/14 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(14)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<div class="month-divider"><div class="month-divider-label">Month 5 — Standards, EIPs & Tools</div><div class="month-divider-line"></div></div>
+
+<!-- STEP 15 -->
+<div class="step-card" id="step-15" data-step="15">
+  <div class="step-header" onclick="toggleStep(15)">
+    <div class="step-num">15</div>
+    <div class="step-meta">
+      <div class="step-title">Security Standards & Checklists</div>
+      <div class="step-subtitle">SCSVS · Rari-Capital Solcurity · Kaden's Attack Vectors List</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 24</span>
+      <span class="badge badge-month">Month 5</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Professional auditors don't rely on memory alone. <strong>They use checklists as a systematic forcing function</strong> to ensure they never skip a category. The SCSVS (Smart Contract Security Verification Standard) is your pre-flight checklist. Every time you audit, you go through every relevant item. This is how you build a consistent, repeatable process.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>SCSVS (Smart Contract Security Verification Standard)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Rari-Capital Solcurity</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Kaden: Smart Contract Attack Vectors</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u15-prog">0/5</div></div>
+      <ul class="checklist understand-list" id="u15">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The structure of SCSVS: which categories it covers (architecture, access control, arithmetic, external calls, etc.)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why checklists alone are not sufficient: novel bugs that don't fit existing categories require creative threat modeling</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to customize a checklist for a specific protocol type (lending protocol checklist vs AMM checklist vs bridge checklist)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What a threat model is and how to build one: who are the actors, what are their capabilities, what are the assets</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The STRIDE threat model (Spoofing, Tampering, Repudiation, Info Disclosure, DoS, Elevation of Privilege) applied to smart contracts</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c15-prog">0/5</div></div>
+      <ul class="checklist cando-list" id="c15">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read through the entire SCSVS checklist and for each item, give a concrete code example of what a violation looks like</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Build your own personal audit checklist, customized by protocol type (DeFi lending, AMM, NFT, bridge)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a full threat model for a simple DeFi protocol from scratch (actors, assets, trust boundaries, attack scenarios)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Apply Solcurity checklist to a real project and document which items pass, fail, or are not applicable</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Take Kaden's attack vector list and for each item, write one sentence on how to detect it during a code review</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog15">0</span>/10 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(15)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 16 -->
+<div class="step-card" id="step-16" data-step="16">
+  <div class="step-header" onclick="toggleStep(16)">
+    <div class="step-num">16</div>
+    <div class="step-meta">
+      <div class="step-title">Important Ethereum Improvement Proposals</div>
+      <div class="step-subtitle">EIP-150 · EIP-1559 · EIP-712 · EIP-2929 · EIP-4337 · ERC-4626 · ERC-2612</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 25</span>
+      <span class="badge badge-month">Month 5</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      EIPs are the foundation on which every contract assumption is built. <strong>When gas costs changed with EIP-2929, protocols that relied on the old gas stipend broke. When EIP-1559 changed fee structures, systems assuming fixed priority fees were affected.</strong> Know the EIPs deeply, especially how they can invalidate previously-secure code.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-150 (Gas Cost Changes)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-1559 (Fee Market)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-712 (Structured Data Signing)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-2929 (Gas Cost for State Access)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>EIP-4337 (Account Abstraction)</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>ERC-2612 (Permit)</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Key EIPs You Must Understand In Depth<div class="checklist-section-progress" id="u16-prog">0/10</div></div>
+      <ul class="checklist understand-list" id="u16">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-150: The 63/64 gas forwarding rule — why you can never send 100% of gas and how this affects reentrancy defenses</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-1559: base fee + priority fee, why base fee is burned, and how this affects contracts that used gasPrice for logic</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-712: structured data signing format, domain separators, and how to audit permit() implementations for vulnerabilities</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-2929: cold vs warm storage access pricing and how it affects protocols built before this EIP (2.3k gas vs 100 gas)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-2930: access lists and how they allow pre-declaring storage slots to avoid cold access costs</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-3529: reduction of gas refunds and why this eliminated certain storage manipulation attacks</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">ERC-2612 (Permit): gasless approval via EIP-712 signatures and the front-running vulnerability in naive implementations</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-1167 (Minimal Proxy / Clone): how it works, the immutable bytecode, and why the implementation address is a security consideration</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-4337 (Account Abstraction): the UserOperation mempool, bundlers, paymasters, and the new attack surfaces they introduce</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">EIP-1271 (Contract Signatures): how smart contract wallets validate signatures and how isValidSignature() can be bypassed</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c16-prog">0/4</div></div>
+      <ul class="checklist cando-list" id="c16">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Audit an ERC-2612 permit() implementation and identify all edge cases (wrong domain separator, missing deadline check, replay)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Explain how EIP-150's 63/64 rule can be exploited to drain a contract that uses .call{gas:...} without checking return</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Given an EIP-712 domain separator, manually compute the struct hash for a specific message and verify it matches the contract</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read a contract and identify which EIPs it implements — then check each implementation against the EIP specification for correctness</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog16">0</span>/14 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(16)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 17 -->
+<div class="step-card" id="step-17" data-step="17">
+  <div class="step-header" onclick="toggleStep(17)">
+    <div class="step-num">17</div>
+    <div class="step-meta">
+      <div class="step-title">The Auditor's Arsenal</div>
+      <div class="step-subtitle">Slither · Mythril · Echidna · Manticore · Surya · Foundry · Tenderly</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Week 26</span>
+      <span class="badge badge-month">Month 5</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Tools are force multipliers, not replacements for skill. <strong>An auditor who relies only on tools will miss everything the tools miss. An auditor with no tools will waste time on what tools can automate.</strong> The goal is to know exactly what each tool can and cannot find, and to use them to free up your brain for the bugs that require human creativity.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">🔧</span>Slither (Static Analysis)</span>
+      <span class="resource-chip"><span class="chip-icon">🔧</span>Mythril (Symbolic Execution)</span>
+      <span class="resource-chip"><span class="chip-icon">🔧</span>Echidna (Fuzzer)</span>
+      <span class="resource-chip"><span class="chip-icon">🔧</span>Manticore (Symbolic Execution)</span>
+      <span class="resource-chip"><span class="chip-icon">🔧</span>Surya (Contract Visualization)</span>
+      <span class="resource-chip"><span class="chip-icon">🔧</span>Tenderly (Simulation)</span>
+      <span class="resource-chip"><span class="chip-icon">🔧</span>BlockSec ETH/BSC Tx Analysis</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Concepts You Must Understand<div class="checklist-section-progress" id="u17-prog">0/7</div></div>
+      <ul class="checklist understand-list" id="u17">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What Slither is: a Python-based static analysis framework that detects vulnerability patterns without executing code — its strengths (speed, pattern matching) and weaknesses (no runtime context)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What symbolic execution is: how tools like Mythril/Manticore explore all possible execution paths mathematically (not just random inputs)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What Echidna is: a property-based fuzzer that takes user-defined invariants and tries to break them with random transactions</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Why automated tools have false positives and false negatives and how to triage their output efficiently</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">What Surya does: generate call graphs, inheritance graphs, and function summaries to understand large codebases quickly</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">How to use Scribble to annotate a contract with formal specifications and run Mythril against the annotated version</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The audit workflow: run Slither first (2 min) → review output → run Surya for visualizations → begin manual review → write Echidna invariants → write Foundry PoCs for findings</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Things You Must Be Able To Do<div class="checklist-section-progress" id="c17-prog">0/7</div></div>
+      <ul class="checklist cando-list" id="c17">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Run Slither on any project, filter false positives, and identify 3 real findings from its output</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write Echidna invariants for a simple vault contract and run a fuzzing campaign that finds a bug</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use Surya to generate an inheritance graph and call graph for a large protocol (e.g., Compound) and use it to navigate the codebase</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Use Tenderly's fork simulation to simulate a transaction against mainnet state without sending it on-chain</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Set up a full audit environment: VS Code + Slither extension + Foundry + Echidna — in under 30 minutes on a fresh machine</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Write a custom Slither detector for a specific pattern you frequently look for (e.g., missing zero-address checks)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Trace a complex exploit transaction using BlockSec's Phalcon Explorer and map each call to the relevant contract function</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog17">0</span>/14 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(17)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<div class="month-divider"><div class="month-divider-label">Month 6 — Real Audits & Continuous Learning</div><div class="month-divider-line"></div></div>
+
+<!-- STEP 18 -->
+<div class="step-card" id="step-18" data-step="18">
+  <div class="step-header" onclick="toggleStep(18)">
+    <div class="step-num">18</div>
+    <div class="step-meta">
+      <div class="step-title">Continuous Learning & Research</div>
+      <div class="step-subtitle">communities · real audits · newsletters · research · competitive auditing</div>
+    </div>
+    <div class="step-badges">
+      <span class="badge badge-week">Month 6 +</span>
+      <span class="badge badge-month">Ongoing</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="step-body">
+    <div class="step-overview">
+      Month 6 is when you stop preparing and start doing. <strong>Your first competitive audit will feel overwhelming — submit anyway.</strong> The auditors who grow fastest are the ones who submit even imperfect findings and learn from the judge's feedback. The community, the newsletters, and the research papers are how you stay current in a field that moves faster than any other.
+    </div>
+    <div class="resources-grid">
+      <span class="resource-chip"><span class="chip-icon">💬</span>Immunefi Discord</span>
+      <span class="resource-chip"><span class="chip-icon">💬</span>Secureum Discord</span>
+      <span class="resource-chip"><span class="chip-icon">💬</span>Eth Security Discord</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Blockthreat Newsletter</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Arxiv (Research Papers)</span>
+      <span class="resource-chip"><span class="chip-icon">🎯</span>Code4rena</span>
+      <span class="resource-chip"><span class="chip-icon">🎯</span>Sherlock</span>
+      <span class="resource-chip"><span class="chip-icon">📄</span>Ethereum Magicians</span>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title understand"><span class="dot"></span>Mindset You Must Have<div class="checklist-section-progress" id="u18-prog">0/5</div></div>
+      <ul class="checklist understand-list" id="u18">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">The field changes every 3–6 months. Staying current is not optional — it is the job. Missing a new attack class means your clients are exposed.</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Public writing (Twitter, Substack, Mirror) is the fastest way to build reputation. One well-researched writeup can open doors no resume can.</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Competitive audits are a training ground, not just income. Every finding you miss is feedback. Review other wardens' reports religiously.</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Bug bounties on Immunefi are where the real money is — but only after you've built pattern recognition through competitive audits first.</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Specialization compounds. Become the best at auditing one protocol type (e.g., lending protocols, bridges) before going broad.</div></div></li>
+      </ul>
+    </div>
+    <div class="checklist-section">
+      <div class="checklist-section-title cando"><span class="dot"></span>Month 6 Milestones — Do These<div class="checklist-section-progress" id="c18-prog">0/10</div></div>
+      <ul class="checklist cando-list" id="c18">
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Submit to your first Code4rena or Sherlock competitive audit — even 1 low finding counts. Ship it.</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Publish a complete audit report on a small open-source DeFi protocol and share it publicly on GitHub or Twitter</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Join the Secureum Discord and participate in at least one RACE (security quiz competition)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Subscribe to Blockthreat newsletter and read every issue for 3 months straight</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Find one valid bug in any open-source protocol and responsibly disclose it (even an info-level finding counts)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Complete a full audit of a protocol solo: scope → manual review → tools → PoCs → report → delivery. Time yourself.</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Follow 20 top security researchers on Twitter and engage with their content (respond, quote, share findings)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Read and understand 3 Arxiv research papers on smart contract security (formal verification, fuzzing, or economic attacks)</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Participate in a post-competition retrospective: read all winning reports, find bugs you missed, document why you missed them</div></div></li>
+        <li onclick="toggleItem(this)"><div class="checkbox"><div class="checkmark"><svg viewBox="0 0 12 9"><polyline points="1,4 4,8 11,1"/></svg></div></div><div><div class="item-text">Apply to at least one private audit firm (Trail of Bits, OpenZeppelin, Sherlock) or post your public audit report as a portfolio piece on Immunefi</div></div></li>
+      </ul>
+    </div>
+    <div class="step-complete-row">
+      <div class="step-progress-mini">Step progress: <span id="prog18">0</span>/15 tasks</div>
+      <button class="mark-done-btn" onclick="markStepDone(18)">Mark Step Complete ✓</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; margin-top:2rem;">
+  <button class="reset-btn" onclick="resetAll()">⚠ Reset All Progress</button>
+</div>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'sca_roadmap_v1';
+
+function saveState() {
+  const state = {};
+  document.querySelectorAll('.checklist li').forEach((li, i) => {
+    state['li_' + i] = li.classList.contains('checked');
+  });
+  document.querySelectorAll('.step-card').forEach(card => {
+    const s = card.dataset.step;
+    state['step_' + s] = card.classList.contains('completed');
+    state['open_' + s] = card.classList.contains('open');
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadState() {
+  try {
+    const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    const lis = document.querySelectorAll('.checklist li');
+    lis.forEach((li, i) => {
+      if (state['li_' + i]) li.classList.add('checked');
+    });
+    document.querySelectorAll('.step-card').forEach(card => {
+      const s = card.dataset.step;
+      if (state['step_' + s]) {
+        card.classList.add('completed');
+        card.querySelector('.step-num').textContent = '✓';
+        card.querySelector('.mark-done-btn').textContent = '✓ Completed';
+        const badges = card.querySelector('.step-badges');
+        if (!badges.querySelector('.badge-done')) {
+          const b = document.createElement('span');
+          b.className = 'badge badge-done';
+          b.textContent = 'Done';
+          badges.prepend(b);
+        }
+      }
+      if (state['open_' + s]) card.classList.add('open');
+    });
+  } catch(e) {}
+  updateAll();
+}
+
+function toggleItem(li) {
+  li.classList.toggle('checked');
+  updateAll();
+  saveState();
+}
+
+function toggleStep(n) {
+  const card = document.getElementById('step-' + n);
+  card.classList.toggle('open');
+  saveState();
+}
+
+function markStepDone(n) {
+  const card = document.getElementById('step-' + n);
+  const isNowDone = !card.classList.contains('completed');
+  card.classList.toggle('completed', isNowDone);
+  const numEl = card.querySelector('.step-num');
+  numEl.textContent = isNowDone ? '✓' : String(n).padStart(2, '0');
+  const btn = card.querySelector('.mark-done-btn');
+  btn.textContent = isNowDone ? '✓ Completed' : 'Mark Step Complete ✓';
+  const badges = card.querySelector('.step-badges');
+  const existing = badges.querySelector('.badge-done');
+  if (isNowDone && !existing) {
+    const b = document.createElement('span');
+    b.className = 'badge badge-done';
+    b.textContent = 'Done';
+    badges.prepend(b);
+  } else if (!isNowDone && existing) {
+    existing.remove();
+  }
+  updateAll();
+  saveState();
+}
+
+function updateAll() {
+  let totalTasks = 0, doneTasks = 0;
+  let stepsCompleted = 0;
+
+  for (let s = 1; s <= 18; s++) {
+    const card = document.getElementById('step-' + s);
+    if (!card) continue;
+    if (card.classList.contains('completed')) stepsCompleted++;
+
+    const lists = card.querySelectorAll('.checklist');
+    let stepTotal = 0, stepDone = 0;
+    lists.forEach(list => {
+      const listId = list.id;
+      const items = list.querySelectorAll('li');
+      let lDone = 0;
+      items.forEach(li => {
+        stepTotal++; totalTasks++;
+        if (li.classList.contains('checked')) { lDone++; stepDone++; doneTasks++; }
+      });
+      const progEl = document.getElementById(listId.replace(/^(u|c)/, match => match) + '-prog');
+      if (progEl) progEl.textContent = lDone + '/' + items.length;
+    });
+
+    const miniEl = document.getElementById('prog' + s);
+    if (miniEl) miniEl.textContent = stepDone;
+  }
+
+  const pct = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
+  document.getElementById('global-pct').textContent = pct + '%';
+  document.getElementById('global-bar').style.width = pct + '%';
+  document.getElementById('steps-done').textContent = stepsCompleted;
+  document.getElementById('tasks-done').textContent = doneTasks;
+  document.getElementById('tasks-total').textContent = totalTasks;
+}
+
+function resetAll() {
+  if (!confirm('Reset ALL progress? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  document.querySelectorAll('.checklist li').forEach(li => li.classList.remove('checked'));
+  document.querySelectorAll('.step-card').forEach(card => {
+    card.classList.remove('completed', 'open');
+    const s = card.dataset.step;
+    card.querySelector('.step-num').textContent = String(parseInt(s)).padStart(2, '0');
+    card.querySelector('.mark-done-btn').textContent = 'Mark Step Complete ✓';
+    const b = card.querySelector('.badge-done');
+    if (b) b.remove();
+  });
+  updateAll();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  if (!localStorage.getItem(STORAGE_KEY)) {
+    document.getElementById('step-1').classList.add('open');
+  }
+});
+</script>
+</body>
+</html>
